@@ -23,6 +23,7 @@ There are several [core transports](#winston-core) included in `winston`, which 
   * [Mail](#mail-transport)
   * [Amazon SNS](#amazon-sns-simple-notification-system-transport)
   * [Graylog2](#graylog2-transport)
+  * [Airbrake](#airbrake-transport)
 
 ## Winston Core
 
@@ -330,10 +331,31 @@ The Graylog2 transport connects to a Graylog2 server over UDP using the followin
   - __facility__: the facility for these log messages (default: "Node.js")
   - __bufferSize__: max UDP packet size, should never exceed the MTU of your system (default: 1400)
 
+### Airbrake Transport
+
+[winston-airbrake2][20] is a transport for winston that sends your logs to Airbrake.io.
+
+``` js
+  var winston = require('winston');
+  winston.add(require('winston-airbrake2').Airbrake, options);
+```
+
+The Airbrake transport utilises the node-airbrake module to send logs to the Airbrake.io API. You can set the following options:
+
+* __apiKey__: The project API Key. (required, default: null)
+* __name__: Transport name. (optional, default: 'airbrake')
+* __level__: The level of message that will be sent to Airbrake (optional, default: 'error')
+* __host__: The information that is displayed within the URL of the Airbrake interface. (optional, default: 'http://' + os.hostname())
+* __env__: The environment will dictate what happens with your message. If your environment is currently one of the 'developmentEnvironments', the error will not be sent to Airbrake. (optional, default: process.env.NODE_ENV)
+* __timeout__: The maximum time allowed to send to Airbrake in milliseconds. (optional, default: 30000)
+* __developmentEnvironments__: The environments that will **not** send errors to Airbrake. (optional, default: ['development', 'test'])
+* __projectRoot__: Extra string sent to Airbrake. (optional, default: null)
+* __appVersion__: Extra string or number sent to Airbrake. (optional, default: null)
+* __consoleLogError__: Toggle the logging of errors to console when the current environment is in the developmentEnvironments array. (optional, default: false)
 
 ### Cassandra Transport
 
-[winston-cassandra][20] is a Cassandra transport:
+[winston-cassandra][21] is a Cassandra transport:
 
 ``` js
   var Cassandra = require('winston-cassandra').Cassandra;
@@ -407,4 +429,5 @@ Array of strings containing the hosts, for example `['host1', 'host2']` (require
 [17]: https://github.com/weaver/node-mail
 [18]: https://github.com/jesseditson/winston-sns
 [19]: https://github.com/namshi/winston-graylog2
-[20]: https://github.com/jorgebay/winston-cassandra
+[20]: https://github.com/rickcraig/winston-airbrake2
+[21]: https://github.com/jorgebay/winston-cassandra
