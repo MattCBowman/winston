@@ -24,6 +24,7 @@ There are several [core transports](#winston-core) included in `winston`, which 
   * [Amazon SNS](#amazon-sns-simple-notification-system-transport)
   * [Graylog2](#graylog2-transport)
   * [Airbrake](#airbrake-transport)
+  * [Cassandra](#cassandra-transport)
 
 ## Winston Core
 
